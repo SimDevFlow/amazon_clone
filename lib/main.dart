@@ -1,4 +1,8 @@
+import 'package:amazon_clone/features/auth/screens/auth_screen.dart';
+import 'package:amazon_clone/routes.dart';
 import 'package:flutter/material.dart';
+import 'constants/global_variable.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -13,18 +17,37 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
+        scaffoldBackgroundColor: GlobalVariables.backgroundColor,
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.orange,
+        // colorScheme: const ColorScheme.light(),
+        primaryColor: GlobalVariables.secondaryColor,
+        appBarTheme: const AppBarTheme(
+          elevation: 0,
+          iconTheme: IconThemeData(
+            color: Colors.black
+          )
+        )
       ),
-      home: const Text('Hello world'),
+      onGenerateRoute: (settings)=> generateRoute(settings),
+      home: Scaffold(
+        appBar: AppBar(title: const Text('Amazone clone'),),
+        body: Column(
+          children: [
+             const Center(
+              child: Text('Hello World'),
+            ),
+            Builder(
+              builder: (context) {
+                return ElevatedButton(onPressed: (){
+                  Navigator.pushNamed(context, AuthScreen.routeName);
+                }, child: const Text('Click'));
+              }
+            )
+          ],
+          
+        ),
+      ),
     );
   }
 }
