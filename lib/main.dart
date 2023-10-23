@@ -30,24 +30,7 @@ class MyApp extends StatelessWidget {
         )
       ),
       onGenerateRoute: (settings)=> generateRoute(settings),
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Amazone clone'),),
-        body: Column(
-          children: [
-             const Center(
-              child: Text('Hello World'),
-            ),
-            Builder(
-              builder: (context) {
-                return ElevatedButton(onPressed: (){
-                  Navigator.pushNamed(context, AuthScreen.routeName);
-                }, child: const Text('Click'));
-              }
-            )
-          ],
-          
-        ),
-      ),
+      home: const AuthScreen(),
     );
   }
 }
