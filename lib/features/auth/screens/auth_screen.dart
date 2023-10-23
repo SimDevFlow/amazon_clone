@@ -1,6 +1,7 @@
 import 'package:amazon_clone/constants/global_variable.dart';
 import 'package:flutter/material.dart';
 import '../../../common/widgets/custum_textfield.dart';
+import '../../../common/widgets/custum_button.dart';
 
 enum Auth { signin, signup }
 
@@ -16,16 +17,16 @@ class _AuthScreenState extends State<AuthScreen> {
   Auth _auth = Auth.signup;
   final _signupFormKey = GlobalKey<FormState>();
   final _signinFormKey = GlobalKey<FormState>();
-  final TextEditingController _password = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _name = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    _password.dispose();
-    _name.dispose();
+    _passwordController.dispose();
+    _nameController.dispose();
     _emailController.dispose();
   }
 
@@ -37,6 +38,7 @@ class _AuthScreenState extends State<AuthScreen> {
         child: Padding(
           padding: const EdgeInsets.all(8),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
                 'Welcome',
@@ -46,6 +48,9 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
               ),
               ListTile(
+                tileColor: _auth == Auth.signup
+                    ? GlobalVariables.backgroundColor
+                    : GlobalVariables.greyBackgroundCOlor,
                 title: const Text(
                   'Create Account',
                   style: TextStyle(fontWeight: FontWeight.bold),
@@ -62,18 +67,43 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
               ),
               if (_auth == Auth.signup)
-                Form(
-                  key: _signupFormKey,
-                  child: Column(
-                    children: [
-                      CustumTextField(
-                        controller: _emailController,
-                        hintText: 'Email',
-                      )
-                    ],
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: GlobalVariables.backgroundColor,
+                  child: Form(
+                    key: _signupFormKey,
+                    child: Column(
+                      children: [
+                        CustumTextField(
+                          controller: _emailController,
+                          hintText: 'Email',
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustumTextField(
+                          controller: _passwordController,
+                          hintText: 'Password',
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustumTextField(
+                          controller: _nameController,
+                          hintText: 'Name',
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustumButton(buttonName: 'Sign Up', onTap: () {})
+                      ],
+                    ),
                   ),
                 ),
               ListTile(
+                tileColor: _auth == Auth.signin
+                    ? GlobalVariables.backgroundColor
+                    : GlobalVariables.greyBackgroundCOlor,
                 title: const Text(
                   'Sign-In',
                   style: TextStyle(fontWeight: FontWeight.bold),
@@ -88,7 +118,34 @@ class _AuthScreenState extends State<AuthScreen> {
                     });
                   },
                 ),
-              )
+              ),
+              if (_auth == Auth.signin)
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: GlobalVariables.backgroundColor,
+                  child: Form(
+                    key: _signinFormKey,
+                    child: Column(
+                      children: [
+                        CustumTextField(
+                          controller: _emailController,
+                          hintText: 'Email',
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustumTextField(
+                          controller: _passwordController,
+                          hintText: 'Password',
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustumButton(buttonName: 'Sign In', onTap: () {})
+                      ],
+                    ),
+                  ),
+                ),
             ],
           ),
         ),
