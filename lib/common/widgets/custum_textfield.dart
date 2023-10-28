@@ -8,14 +8,13 @@ class CustumTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-
       controller: controller,
       decoration: InputDecoration(
         hintText: hintText,
-        border: OutlineInputBorder(
+        border: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.black38),
         ),
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(
             color: Colors.black38,
           ),

@@ -44,3 +44,5 @@ app.*.map.json
 /android/app/release
 #exclude node modules 
 server/node_modules
+#exlude global variable
+lib/constants/
