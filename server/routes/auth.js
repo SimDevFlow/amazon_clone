@@ -1,4 +1,5 @@
-import express from "express";
+import express, { response } from "express";
+import encrypt from "bcryptjs";
 import { User } from "../models/user.js";
 
 const authRouter = express.Router();
@@ -9,17 +10,18 @@ try {
         if (existingUser) {
             return response.status(400).json({msg:"user with similar account found"});
         }
+        const hashPassword = await encrypt.hash(password,8);
         let user = new User({
             email,
-            password,
+            password:hashPassword,
             name
         });
         user = await user.save();
-        response.send(user);
+        response.json(user);
     
     })
-} catch (error) {
-    console.log(error.message);
+} catch (e) {
+    response.status(500).json({error: e.message});
 }
 
 

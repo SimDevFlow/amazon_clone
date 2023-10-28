@@ -23,6 +23,12 @@ const userSchema = new Schema({
   password: {
     require: true,
     type: String,
+    validate: {
+      validator: (value) => {
+        return value.length > 5;
+      },
+      message: "Enter a long password",
+    },
   },
   address: {
     type: String,
@@ -34,6 +40,6 @@ const userSchema = new Schema({
   },
 });
 
-const User = mongoose.model("User",userSchema);
+const User = mongoose.model("User", userSchema);
 
-export{User}
+export { User };
