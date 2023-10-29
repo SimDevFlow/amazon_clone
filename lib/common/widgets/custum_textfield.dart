@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class CustumTextField extends StatelessWidget {
   final TextEditingController controller;
-  final  String hintText;
-  const CustumTextField({super.key, required this.controller,required this.hintText});
+  final String hintText;
+  const CustumTextField(
+      {super.key, required this.controller, required this.hintText});
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +21,12 @@ class CustumTextField extends StatelessWidget {
           ),
         ),
       ),
-      
-      validator: (value) {},
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'enter your $hintText';
+        }
+        return null;
+      },
     );
   }
 }
