@@ -4,6 +4,7 @@ import 'package:amazon_clone/constants/error_handling.dart';
 import 'package:amazon_clone/constants/global_variable.dart';
 import 'package:amazon_clone/models/user.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../constants/utils.dart';
 import 'package:http/http.dart' as http;
 
@@ -59,12 +60,12 @@ class AuthService {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
-      print(response.body);
+      
       httpErrorHandling(
         response: response,
         context: context,
-        onSuccess: () {
-         
+        onSuccess: () async{
+          SharedPreferences prefs = await SharedPreferences.getInstance();
         },
       );
     } catch (e) {
